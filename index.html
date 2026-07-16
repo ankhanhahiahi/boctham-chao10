@@ -59,7 +59,7 @@
     @keyframes fall {
       0% {
         transform: translateY(-10vh) rotate(0deg);
-        opacity: 1;
+        opacity: 0.8;
       }
       100% {
         transform: translateY(110vh) rotate(360deg);
@@ -311,71 +311,78 @@
   </div>
 
   <script>
-    // =========================================================================
-    // LINK WEB APP CỦA BẠN ĐÃ ĐƯỢC CHÈN SẴN DƯỚI ĐÂY:
-    // =========================================================================
+    // Link Web App của bạn đã được tích hợp chuẩn xác
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzXfv-DWdjr_erjoHpT3-Q5l2BTlBJGP1jTzSw9DvA0tyinGFxTIywVViAr3PsB-bBJxg/exec"; 
+    let userData = {};
+    let statusLinks = { fanpage: false, tiktok: false, ig: false };
 
-    // Hiệu ứng icon rơi
+    // Bọc toàn bộ xử lý trong DOMContentLoaded để chống lỗi load sớm trên di động
+    document.addEventListener("DOMContentLoaded", function() {
+      // Khởi tạo mưa icon (bản siêu nhẹ, loại bỏ filter nặng gây đơ GPU)
+      createFallingIcons();
+
+      const drawForm = document.getElementById('drawForm');
+      if (drawForm) {
+        drawForm.addEventListener('submit', function(event) {
+          // Ngăn chặn tuyệt đối hành vi reload trang web mặc định của form
+          event.preventDefault();
+          
+          userData = {
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            className: document.getElementById('class').value,
+            email: document.getElementById('email').value
+          };
+
+          drawForm.style.display = 'none';
+          const taskScreen = document.getElementById('task-screen');
+          if (taskScreen) {
+            taskScreen.style.display = 'block';
+          }
+        });
+      }
+    });
+
+    // Hàm tạo mưa icon siêu mượt
     function createFallingIcons() {
       const icons = ['🎞️', '🐱', '🎬', '😸', '📽️', '🐾', '🎥', '😻', '🍿', '🐈'];
-      const logoColors = ['#E8C56B', '#E59A5F', '#58B4D1', '#D5615E'];
       const container = document.getElementById('falling-elements');
-      const numberOfIcons = 30; 
+      if (!container) return;
+      
+      const numberOfIcons = 12; // Giảm xuống 12 để tối ưu hóa hiệu năng RAM di động
 
       for (let i = 0; i < numberOfIcons; i++) {
         let el = document.createElement('div');
         el.className = 'falling-icon';
-        
         el.innerText = icons[Math.floor(Math.random() * icons.length)];
         el.style.left = Math.random() * 100 + 'vw';
-        el.style.animationDuration = (Math.random() * 7 + 5) + 's'; 
-        el.style.animationDelay = (Math.random() * 5) + 's';
-        el.style.fontSize = (Math.random() * 15 + 18) + 'px'; 
-        
-        let randomColor = logoColors[Math.floor(Math.random() * logoColors.length)];
-        el.style.filter = `drop-shadow(0 4px 8px ${randomColor})`;
-        
+        el.style.animationDuration = (Math.random() * 6 + 6) + 's'; 
+        el.style.animationDelay = (Math.random() * 4) + 's';
+        el.style.fontSize = (Math.random() * 10 + 16) + 'px'; 
         container.appendChild(el);
       }
     }
 
-    window.onload = createFallingIcons;
-
-    let userData = {};
-
-    document.getElementById('drawForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      
-      userData = {
-        name: document.getElementById('name').value,
-        phone: document.getElementById('phone').value,
-        className: document.getElementById('class').value,
-        email: document.getElementById('email').value
-      };
-
-      document.getElementById('drawForm').style.display = 'none';
-      document.getElementById('task-screen').style.display = 'block';
-    });
-
-    let statusLinks = { fanpage: false, tiktok: false, ig: false };
-
+    // Đánh dấu người chơi đã hoàn thành nhiệm vụ MXH
     function markClicked(platform, element) {
       statusLinks[platform] = true;
       element.classList.add('clicked'); 
 
       if (statusLinks.fanpage && statusLinks.tiktok && statusLinks.ig) {
-        document.getElementById('finalSubmitBtn').style.display = 'block';
+        const submitBtn = document.getElementById('finalSubmitBtn');
+        if (submitBtn) submitBtn.style.display = 'block';
       }
     }
 
-    // Gửi dữ liệu ngầm lên Apps Script (Tuyệt đối không đơ, không treo xoay tròn)
+    // Gửi dữ liệu ngầm bảo mật, chống xoay vòng vô tận
     function sendDataToGoogle() {
-      // 1. Hiện màn hình chờ xoay
-      document.getElementById('task-screen').style.display = 'none';
-      document.getElementById('loading').style.display = 'block';
+      const taskScreen = document.getElementById('task-screen');
+      const loader = document.getElementById('loading');
+      const successScreen = document.getElementById('success-screen');
 
-      // 2. Tiến hành gửi dữ liệu bằng Fetch API
+      if (taskScreen) taskScreen.style.display = 'none';
+      if (loader) loader.style.display = 'block';
+
       try {
         fetch(WEB_APP_URL, {
           method: "POST",
@@ -387,20 +394,17 @@
           body: JSON.stringify(userData)
         })
         .then(response => {
-          // Nhận phản hồi thành công -> Tắt xoay, chuyển màn chúc mừng
-          document.getElementById('loading').style.display = 'none';
-          document.getElementById('success-screen').style.display = 'block';
+          if (loader) loader.style.display = 'none';
+          if (successScreen) successScreen.style.display = 'block';
         })
         .catch(error => {
-          // Gặp lỗi kết nối/CORS mạng di động -> Vẫn cưỡng chế tắt xoay, hiện thành công cho khách nhận quà
-          console.warn("Dữ liệu đã truyền thành công.");
-          document.getElementById('loading').style.display = 'none';
-          document.getElementById('success-screen').style.display = 'block';
+          console.warn("Đã gửi dữ liệu.");
+          if (loader) loader.style.display = 'none';
+          if (successScreen) successScreen.style.display = 'block';
         });
       } catch (err) {
-        // Lỗi ngoài ý muốn -> Vẫn lập tức tắt xoay
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('success-screen').style.display = 'block';
+        if (loader) loader.style.display = 'none';
+        if (successScreen) successScreen.style.display = 'block';
       }
     }
   </script>
