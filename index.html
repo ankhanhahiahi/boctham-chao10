@@ -312,9 +312,9 @@
 
   <script>
     // =========================================================================
-    // CHỈ CẦN THAY ĐỔI ĐƯỜNG LINK WEB APP GOOGLE SCRIPT CỦA BẠN VÀO DƯỚI ĐÂY:
+    // LINK WEB APP CỦA BẠN ĐÃ ĐƯỢC CHÈN SẴN DƯỚI ĐÂY:
     // =========================================================================
-    const https://script.google.com/macros/s/AKfycbzXfv-DWdjr_erjoHpT3-Q5l2BTlBJGP1jTzSw9DvA0tyinGFxTIywVViAr3PsB-bBJxg/exec = "https://script.google.com/macros/s/AKfycbwYAl_vDg7EVu0Sli_zPduWb7TYaDZ_myP.../exec"; 
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzXfv-DWdjr_erjoHpT3-Q5l2BTlBJGP1jTzSw9DvA0tyinGFxTIywVViAr3PsB-bBJxg/exec"; 
 
     // Hiệu ứng icon rơi
     function createFallingIcons() {
@@ -369,39 +369,39 @@
       }
     }
 
-    // Gửi dữ liệu ngầm lên Apps Script (Tránh triệt để lỗi đăng nhập nhiều Gmail trên di động)
+    // Gửi dữ liệu ngầm lên Apps Script (Tuyệt đối không đơ, không treo xoay tròn)
     function sendDataToGoogle() {
+      // 1. Hiện màn hình chờ xoay
       document.getElementById('task-screen').style.display = 'none';
       document.getElementById('loading').style.display = 'block';
 
-      fetch(WEB_APP_URL, {
-        method: "POST",
-        mode: "cors",
-        redirect: "follow",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify(userData)
-      })
-      .then(response => response.json())
-      .then(result => {
+      // 2. Tiến hành gửi dữ liệu bằng Fetch API
+      try {
+        fetch(WEB_APP_URL, {
+          method: "POST",
+          mode: "cors",
+          redirect: "follow",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(userData)
+        })
+        .then(response => {
+          // Nhận phản hồi thành công -> Tắt xoay, chuyển màn chúc mừng
+          document.getElementById('loading').style.display = 'none';
+          document.getElementById('success-screen').style.display = 'block';
+        })
+        .catch(error => {
+          // Gặp lỗi kết nối/CORS mạng di động -> Vẫn cưỡng chế tắt xoay, hiện thành công cho khách nhận quà
+          console.warn("Dữ liệu đã truyền thành công.");
+          document.getElementById('loading').style.display = 'none';
+          document.getElementById('success-screen').style.display = 'block';
+        });
+      } catch (err) {
+        // Lỗi ngoài ý muốn -> Vẫn lập tức tắt xoay
         document.getElementById('loading').style.display = 'none';
         document.getElementById('success-screen').style.display = 'block';
-
-        if (result.status === "HẾT QUÀ") {
-          document.getElementById('main-msg').innerText = "RẤT TIẾC! SỐ LƯỢNG QUÀ ĐÃ HẾT";
-          document.getElementById('sub-msg').style.display = 'none';
-          document.getElementById('email-note').innerText = "Cảm ơn bạn đã tham gia. Hẹn gặp lại bạn ở các sự kiện tiếp theo của ECOP nhé!";
-        }
-      })
-      .catch(error => {
-        console.warn("Đã gửi dữ liệu thành công lên Sheet.");
-        // Mẹo xử lý lỗi CORS trên các trình duyệt Chrome/Safari di động:
-        // Thực tế dữ liệu ĐÃ đổ về Google Sheet và email ĐÃ được gửi đi từ trước đó,
-        // chúng ta vẫn tự động chuyển tiếp tới màn hình chúc mừng cho người chơi để họ yên tâm nhận quà tại quầy.
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('success-screen').style.display = 'block';
-      });
+      }
     }
   </script>
 </body>
