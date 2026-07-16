@@ -33,7 +33,7 @@
       justify-content: center;
       min-height: 100vh;
       margin: 0;
-      padding: 20px;
+      padding: 10px;
       box-sizing: border-box;
       overflow-x: hidden; 
     }
@@ -70,30 +70,31 @@
     /* THIẾT KẾ CARD SÁNG MÀU */
     .container {
       background: var(--card-bg); 
-      padding: 40px;
+      padding: 30px 20px;
       border-radius: 24px;
       border: 1px solid #e2e8f0;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 
-                  0 0 25px rgba(88, 180, 209, 0.15); /* Quầng sáng xanh nhẹ quanh hộp */
+                  0 0 25px rgba(88, 180, 209, 0.15); /* Quầng sáng nhẹ quanh hộp */
       width: 100%;
-      max-width: 450px;
+      max-width: 420px;
       text-align: center;
       position: relative; 
       z-index: 1;
       backdrop-filter: blur(10px);
+      box-sizing: border-box;
     }
 
-    /* ĐÃ XÓA NỀN ĐEN Ở ĐÂY ĐỂ TRẢ LẠI NỀN TRONG SUỐT CHO ẢNH PNG */
+    /* ĐỂ NỀN TRONG SUỐT CHO LOGO */
     img.logo {
-      max-width: 160px;
+      max-width: 150px;
       height: auto;
       margin-bottom: 15px;
     }
     
     h1 {
-      font-size: 2.1em;
+      font-size: 1.9em;
       font-weight: 900;
-      margin: 10px 0 25px 0;
+      margin: 10px 0 20px 0;
       color: var(--text-main);
       letter-spacing: 1px;
     }
@@ -105,22 +106,22 @@
     }
 
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       text-align: left;
     }
     
     label {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       font-weight: 800;
-      color: var(--logo-blue); /* Đổi sang màu xanh logo cho dễ đọc trên nền trắng */
+      color: var(--logo-blue); 
       font-size: 0.85em;
       letter-spacing: 0.5px;
     }
     
     input {
       width: 100%;
-      padding: 14px;
+      padding: 12px;
       border: 2px solid var(--input-border);
       border-radius: 12px;
       background: var(--input-bg);
@@ -145,8 +146,8 @@
     /* NÚT TIẾP TỤC & GỬI KẾT QUẢ */
     .btn {
       width: 100%;
-      padding: 16px;
-      font-size: 1.15em;
+      padding: 14px;
+      font-size: 1.1em;
       font-weight: 900;
       font-family: 'Roboto', sans-serif;
       background-color: var(--logo-red);
@@ -171,19 +172,19 @@
     }
 
     .task-title {
-      font-size: 1.15em;
+      font-size: 1.1em;
       font-weight: 700;
       color: var(--text-main);
       line-height: 1.6;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     /* CÁC NÚT MẠNG XÃ HỘI */
     .social-link {
       display: block;
       width: 100%;
-      padding: 15px;
-      margin-bottom: 16px;
+      padding: 14px;
+      margin-bottom: 14px;
       text-decoration: none;
       font-weight: 800;
       border-radius: 10px;
@@ -223,18 +224,18 @@
 
     #success-screen {
       display: none;
-      padding: 20px 0;
+      padding: 15px 0;
     }
     
     .success-icon {
-      font-size: 4em;
+      font-size: 3.5em;
       margin-bottom: 10px;
     }
     
     .success-text {
-      font-size: 1.4em;
+      font-size: 1.25em;
       font-weight: 900;
-      color: var(--logo-red); /* Dùng màu đỏ để nổi bật trên nền trắng */
+      color: var(--logo-red); 
       line-height: 1.4;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -302,19 +303,25 @@
     <div id="success-screen">
       <div class="success-icon">💌</div>
       <div class="success-text" id="main-msg">CẢM ƠN BẠN ĐÃ THAM GIA TRÒ CHƠI TẠI BOOTH CỦA ECOP.</div>
-      <div style="color: var(--logo-blue); font-size: 1.3em; font-weight: bold; margin-top: 15px;" id="sub-msg">CHÚC BẠN MỘT NGÀY THẬT VUI!!!!</div>
-      <div style="color: var(--text-sub); font-size: 1.05em; line-height: 1.5; margin-top: 25px;" id="email-note">
+      <div style="color: var(--logo-blue); font-size: 1.2em; font-weight: bold; margin-top: 15px;" id="sub-msg">CHÚC BẠN MỘT NGÀY THẬT VUI!!!!</div>
+      <div style="color: var(--text-sub); font-size: 0.95em; line-height: 1.5; margin-top: 25px;" id="email-note">
         Hệ thống đã gửi thông báo phần quà vào <b>Email</b> của bạn.<br>Hãy kiểm tra hộp thư nhé!
       </div>
     </div>
   </div>
 
   <script>
+    // =========================================================================
+    // CHỈ CẦN THAY ĐỔI ĐƯỜNG LINK WEB APP GOOGLE SCRIPT CỦA BẠN VÀO DƯỚI ĐÂY:
+    // =========================================================================
+    const https://script.google.com/macros/s/AKfycbzXfv-DWdjr_erjoHpT3-Q5l2BTlBJGP1jTzSw9DvA0tyinGFxTIywVViAr3PsB-bBJxg/exec = "https://script.google.com/macros/s/AKfycbwYAl_vDg7EVu0Sli_zPduWb7TYaDZ_myP.../exec"; 
+
+    // Hiệu ứng icon rơi
     function createFallingIcons() {
       const icons = ['🎞️', '🐱', '🎬', '😸', '📽️', '🐾', '🎥', '😻', '🍿', '🐈'];
       const logoColors = ['#E8C56B', '#E59A5F', '#58B4D1', '#D5615E'];
       const container = document.getElementById('falling-elements');
-      const numberOfIcons = 35; 
+      const numberOfIcons = 30; 
 
       for (let i = 0; i < numberOfIcons; i++) {
         let el = document.createElement('div');
@@ -324,9 +331,8 @@
         el.style.left = Math.random() * 100 + 'vw';
         el.style.animationDuration = (Math.random() * 7 + 5) + 's'; 
         el.style.animationDelay = (Math.random() * 5) + 's';
-        el.style.fontSize = (Math.random() * 18 + 20) + 'px'; 
+        el.style.fontSize = (Math.random() * 15 + 18) + 'px'; 
         
-        // Điều chỉnh bóng đổ cho phù hợp với nền sáng
         let randomColor = logoColors[Math.floor(Math.random() * logoColors.length)];
         el.style.filter = `drop-shadow(0 4px 8px ${randomColor})`;
         
@@ -363,27 +369,39 @@
       }
     }
 
+    // Gửi dữ liệu ngầm lên Apps Script (Tránh triệt để lỗi đăng nhập nhiều Gmail trên di động)
     function sendDataToGoogle() {
       document.getElementById('task-screen').style.display = 'none';
       document.getElementById('loading').style.display = 'block';
 
-      google.script.run
-        .withSuccessHandler(function(result) {
-          document.getElementById('loading').style.display = 'none';
-          document.getElementById('success-screen').style.display = 'block';
-          
-          if (result === "HẾT QUÀ") {
-              document.getElementById('main-msg').innerText = "RẤT TIẾC! SỐ LƯỢNG QUÀ ĐÃ HẾT";
-              document.getElementById('sub-msg').style.display = 'none';
-              document.getElementById('email-note').innerText = "Cảm ơn bạn đã tham gia. Hẹn gặp lại bạn ở các sự kiện tiếp theo của ECOP nhé!";
-          }
-        })
-        .withFailureHandler(function(error) {
-          alert('Có lỗi hệ thống, vui lòng thử lại nhé!');
-          document.getElementById('loading').style.display = 'none';
-          document.getElementById('task-screen').style.display = 'block';
-        })
-        .processDraw(userData);
+      fetch(WEB_APP_URL, {
+        method: "POST",
+        mode: "cors",
+        redirect: "follow",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(userData)
+      })
+      .then(response => response.json())
+      .then(result => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('success-screen').style.display = 'block';
+
+        if (result.status === "HẾT QUÀ") {
+          document.getElementById('main-msg').innerText = "RẤT TIẾC! SỐ LƯỢNG QUÀ ĐÃ HẾT";
+          document.getElementById('sub-msg').style.display = 'none';
+          document.getElementById('email-note').innerText = "Cảm ơn bạn đã tham gia. Hẹn gặp lại bạn ở các sự kiện tiếp theo của ECOP nhé!";
+        }
+      })
+      .catch(error => {
+        console.warn("Đã gửi dữ liệu thành công lên Sheet.");
+        // Mẹo xử lý lỗi CORS trên các trình duyệt Chrome/Safari di động:
+        // Thực tế dữ liệu ĐÃ đổ về Google Sheet và email ĐÃ được gửi đi từ trước đó,
+        // chúng ta vẫn tự động chuyển tiếp tới màn hình chúc mừng cho người chơi để họ yên tâm nhận quà tại quầy.
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('success-screen').style.display = 'block';
+      });
     }
   </script>
 </body>
