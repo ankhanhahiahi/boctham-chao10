@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ECOP - Bốc Thăm May Mắn</title>
+  
+  <!-- IMPORT FONT CHỮ MERRIWEATHER -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
   <style>
     /* BẢNG MÀU CHÍNH TỪ LOGO ECOP */
     :root {
@@ -19,7 +25,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: 'Merriweather', serif;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -106,26 +112,26 @@
     /* TIÊU ĐỀ TRÊN CÙNG */
     .main-title {
       margin-bottom: 24px;
-      line-height: 1.25;
+      line-height: 1.35;
     }
 
     .title-line1 {
       display: block;
-      font-size: 22px;
-      font-weight: 800;
+      font-size: 21px;
+      font-weight: 700;
       color: var(--ecop-dark);
       letter-spacing: 0.5px;
     }
 
     .title-line2 {
       display: block;
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 900;
       background: linear-gradient(135deg, var(--ecop-yellow) 0%, var(--ecop-orange) 35%, var(--ecop-blue) 70%, var(--ecop-red) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       margin-top: 4px;
     }
 
@@ -146,10 +152,10 @@
 
     .form-group input {
       width: 100%;
-      padding: 14px 16px;
+      padding: 13px 16px;
       border: 2px solid #e2e8f0;
       border-radius: 14px;
-      font-size: 16px;
+      font-size: 15px;
       outline: none;
       background: #ffffff;
       color: #0f172a;
@@ -163,7 +169,8 @@
 
     .form-group input::placeholder {
       color: #94a3b8;
-      font-size: 14px;
+      font-size: 13px;
+      font-style: italic;
     }
 
     /* NÚT GỬI KẾT QUẢ */
@@ -174,8 +181,8 @@
       border: none;
       padding: 16px;
       border-radius: 16px;
-      font-size: 17px;
-      font-weight: 800;
+      font-size: 16px;
+      font-weight: 700;
       cursor: pointer;
       margin-top: 10px;
       box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
@@ -267,13 +274,13 @@
     <!-- MÀN HÌNH THÀNH CÔNG -->
     <div id="successScreen">
       <div class="success-badge">✓</div>
-      <h2 style="color: #166534; font-size: 22px; font-weight: 800; margin-bottom: 8px;">GỬI KẾT QUẢ THÀNH CÔNG!</h2>
-      <p style="color: #64748b; font-size: 14px; line-height: 1.5;">
+      <h2 style="color: #166534; font-size: 20px; font-weight: 700; margin-bottom: 8px;">GỬI KẾT QUẢ THÀNH CÔNG!</h2>
+      <p style="color: #64748b; font-size: 14px; line-height: 1.6;">
         Thông tin của bạn đã được hệ thống ghi nhận.
       </p>
       
       <div class="success-box">
-        <p style="color: #0e3a6c; font-size: 15px; font-weight: 800; margin: 0; line-height: 1.4;">
+        <p style="color: #0e3a6c; font-size: 14px; font-weight: 700; margin: 0; line-height: 1.5;">
           📩 Hãy kiểm tra Email ngay để xem phần quà may mắn bạn nhận được nhé!
         </p>
       </div>
@@ -318,7 +325,7 @@
     }
     setInterval(createFallingItem, 550);
 
-    // 2. KẾT NỐI VÀ GỬI DỮ LIỆU ĐẾN GOOGLE APPS SCRIPT
+    // 2. KẾT NỐI VÀ GỬI DỮ LIỆU ĐẾN GOOGLE APPS SCRIPT MỚI
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZgiy9o0E1RvZm-35B98GfEy1i40cjl2W526cJ8jY5TkL65oF4eOaFdyQs7qyDPa_-UA/exec";
 
     document.getElementById("ecopForm").addEventListener("submit", function(e) {
