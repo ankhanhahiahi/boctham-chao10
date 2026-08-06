@@ -13,7 +13,6 @@
       --ecop-red: #D75756;
       --ecop-dark: #0e3a6c;
       --ecop-green: #22c55e;
-      --bg-white: #ffffff;
     }
 
     * {
@@ -91,21 +90,19 @@
       border: 3px solid #f8fafc;
     }
 
-    /* KHUNG CHỨA LOGO ECOP */
+    /* KHUNG LOGO ECOP (NỀN TRONG SUỐT HOÀN TOÀN) */
     .logo-container {
-      background: #111827;
-      border-radius: 20px;
-      padding: 12px 20px;
+      background: transparent;
       display: inline-block;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+      margin-bottom: 12px;
     }
 
     .logo-img {
-      max-width: 160px;
+      max-width: 180px;
       height: auto;
       display: block;
       margin: 0 auto;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.06));
     }
 
     /* TIÊU ĐỀ TRÊN CÙNG */
@@ -154,7 +151,7 @@
       padding: 14px 16px;
       border: 2px solid #e2e8f0;
       border-radius: 14px;
-      font-size: 16px; /* Giữ 16px chuẩn để tránh zoom trên iPhone/iPad */
+      font-size: 16px; /* Cỡ 16px ngăn tự động phóng to trên iOS/iPadOS */
       outline: none;
       background: #ffffff;
       color: #0f172a;
@@ -232,7 +229,7 @@
   <!-- THẺ CHÍNH (CARD) -->
   <div class="card">
     
-    <!-- LOGO ECOP -->
+    <!-- LOGO ECOP (NỀN TRONG SUỐT) -->
     <div class="logo-container">
       <img src="https://i.ibb.co/ymHxvWhF/LOGO-ECOP.png" alt="LOGO ECOP" class="logo-img">
     </div>
@@ -301,14 +298,12 @@
       const item = document.createElement('div');
       item.className = 'falling-item';
       
-      // Lấy ngẫu nhiên icon
       const randomIcon = fallingItems[Math.floor(Math.random() * fallingItems.length)];
       item.innerText = randomIcon;
 
-      // Thiết lập vị trí, kích thước và tốc độ rơi ngẫu nhiên
-      const startLeft = Math.random() * 100; // Vị trí từ 0% đến 100% chiều rộng
-      const size = Math.random() * 16 + 22;  // Kích thước icon từ 22px đến 38px
-      const duration = Math.random() * 5 + 6; // Thời gian rơi từ 6s đến 11s
+      const startLeft = Math.random() * 100;
+      const size = Math.random() * 16 + 22;
+      const duration = Math.random() * 5 + 6;
       const delay = Math.random() * 2;
 
       item.style.left = startLeft + 'vw';
@@ -318,18 +313,15 @@
 
       container.appendChild(item);
 
-      // Tự động giải phóng phần tử sau khi rơi xong
       setTimeout(() => {
         item.remove();
       }, (duration + delay) * 1000);
     }
 
-    // Khởi tạo các phần tử ban đầu và duy trì rơi liên tục
     for (let i = 0; i < 22; i++) {
       createFallingItem();
     }
     setInterval(createFallingItem, 550);
-
 
     // 2. KẾT NỐI VÀ GỬI DỮ LIỆU ĐẾN GOOGLE APPS SCRIPT
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZgiy9o0E1RvZm-35B98GfEy1i40cjl2W526cJ8jY5TkL65oF4eOaFdyQs7qyDPa_-UA/exec";
