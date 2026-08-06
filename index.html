@@ -3,103 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Booth Trò Chơi ECOP - Gửi Kết Quả</title>
+  <title>ECOP - Bốc Thăm May Mắn</title>
   <style>
     :root {
+      --ecop-green: #22c55e;
       --ecop-blue: #1e3a8a;
-      --ecop-green: #166534;
-      --ecop-red: #dc2626;
-      --bg-color: #f8fafc;
+      --bg-color: #f1f5f9;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
     body { background-color: var(--bg-color); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
 
-    .container {
+    .card {
       background: #ffffff;
       width: 100%;
-      max-width: 480px;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-      border: 1px solid #e2e8f0;
+      max-width: 420px;
+      padding: 32px 24px;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      text-align: center;
     }
 
-    .header { text-align: center; margin-bottom: 24px; }
-    .header h1 { color: var(--ecop-blue); font-size: 22px; font-weight: 800; margin-bottom: 6px; }
-    .header p { color: #64748b; font-size: 14px; }
+    .logo { font-size: 32px; font-weight: 900; letter-spacing: 2px; margin-bottom: 12px; }
+    .logo span:nth-child(1) { color: #eab308; }
+    .logo span:nth-child(2) { color: #f97316; }
+    .logo span:nth-child(3) { color: #06b6d4; }
+    .logo span:nth-child(4) { color: #ec4899; }
 
-    .form-group { margin-bottom: 16px; text-align: left; }
-    .form-group label { display: block; font-size: 13px; font-weight: 700; color: #334155; margin-bottom: 6px; }
-    .form-group input, .form-group select {
+    .title { color: #1e293b; font-size: 22px; font-weight: 800; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+    .form-group { text-align: left; margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 6px; }
+    .form-group input {
       width: 100%;
-      padding: 12px;
+      padding: 12px 14px;
       border: 1px solid #cbd5e1;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 14px;
       outline: none;
+      background: #f8fafc;
       transition: all 0.2s;
     }
-    .form-group input:focus, .form-group select:focus { border-color: var(--ecop-blue); box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.15); }
+    .form-group input:focus { border-color: var(--ecop-green); background: #fff; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15); }
 
     .btn-submit {
       width: 100%;
-      background: var(--ecop-blue);
+      background: var(--ecop-green);
       color: #ffffff;
       border: none;
       padding: 14px;
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       margin-top: 10px;
-      transition: background 0.2s;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+      transition: all 0.2s;
     }
-    .btn-submit:hover { background: #1e1b4b; }
+    .btn-submit:hover { background: #16a34a; }
 
-    /* MÀN HÌNH THÀNH CÔNG */
-    #successScreen {
-      display: none;
-      text-align: center;
-      padding: 20px 10px;
-    }
-    .success-icon {
-      width: 64px;
-      height: 64px;
-      background: #dcfce7;
-      color: #166534;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      margin: 0 auto 16px auto;
-    }
-    .success-title { color: var(--ecop-blue); font-size: 20px; font-weight: 800; margin-bottom: 8px; }
-    .success-desc { color: #475569; font-size: 14px; line-height: 1.5; margin-bottom: 20px; }
-    .prize-badge {
-      display: inline-block;
-      background: #fef2f2;
-      color: var(--ecop-red);
-      border: 1px dashed var(--ecop-red);
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: 800;
-      margin-top: 8px;
-    }
+    #successScreen { display: none; text-align: center; padding: 10px 0; }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <!-- Form điền thông tin -->
-    <div id="formScreen">
-      <div class="header">
-        <h1>EVENT CLUB OF PHC</h1>
-        <p>GỬI KẾT QUẢ BỐC THĂM NHẬN QUÀ</p>
-      </div>
+  <div class="card">
+    <div class="logo">
+      <span>E</span><span>C</span><span>O</span><span>P</span>
+    </div>
+    <h1 class="title">🎬 BỐC THĂM 🐾 MAY MẮN</h1>
 
+    <!-- FORM ĐIỀN THÔNG TIN -->
+    <div id="formScreen">
       <form id="ecopForm">
         <div class="form-group">
           <label for="name">Họ và Tên *</label>
@@ -113,7 +88,7 @@
 
         <div class="form-group">
           <label for="className">Lớp *</label>
-          <input type="text" id="className" required placeholder="Nhập lớp (VD: 10A1)...">
+          <input type="text" id="className" required placeholder="VD: 10A1...">
         </div>
 
         <div class="form-group">
@@ -121,46 +96,34 @@
           <input type="email" id="email" required placeholder="Nhập địa chỉ email...">
         </div>
 
-        <div class="form-group">
-          <label for="prize">Phần quà trúng thưởng *</label>
-          <select id="prize" required>
-            <option value="MÓC KHÓA">MÓC KHÓA</option>
-            <option value="TRANH VẼ ẢNH">TRANH VẼ ẢNH</option>
-            <option value="BLIND BOX">BLIND BOX</option>
-          </select>
-        </div>
-
         <button type="submit" class="btn-submit" id="submitBtn">GỬI KẾT QUẢ</button>
       </form>
     </div>
 
-    <!-- Màn hình gửi kết quả thành công -->
+    <!-- MÀN HÌNH THÀNH CÔNG -->
     <div id="successScreen">
-      <div class="success-icon">✓</div>
-      <h2 class="success-title">GỬI KẾT QUẢ THÀNH CÔNG!</h2>
-      <p class="success-desc">Thông tin của bạn đã được lưu vào hệ thống. Email thông báo phần quà cũng đã được gửi đến hộp thư của bạn.</p>
-      <p style="font-size: 13px; color: #64748b;">Phần quà bạn đã nhận:</p>
-      <div class="prize-badge" id="displayPrize">MÓC KHÓA</div>
+      <h2 style="color: #166534; font-size: 20px; font-weight: 800; margin-bottom: 8px;">GỬI KẾT QUẢ THÀNH CÔNG!</h2>
+      <p style="color: #64748b; font-size: 14px; margin-bottom: 12px;">Kết quả phần quà bốc thăm may mắn đã được lưu vào hệ thống và tự động gửi tới email của bạn!</p>
+      <p style="color: #0e3a6c; font-size: 13px; font-weight: bold;">📩 Hãy kiểm tra hộp thư Email để xem chi tiết món quà nhé!</p>
     </div>
   </div>
 
   <script>
-    // Link Web App chính thức của bạn
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXfv-DWdjr_erjoHpT3-Q5l2BTlBJGP1jTzSw9DvA0tyinGFxTIywVViAr3PsB-bBJxg/exec";
+    // URL Web App mới của bạn
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZgiy9o0E1RvZm-35B98GfEy1i40cjl2W526cJ8jY5TkL65oF4eOaFdyQs7qyDPa_-UA/exec";
 
     document.getElementById("ecopForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
       const submitBtn = document.getElementById("submitBtn");
-      submitBtn.innerText = "Đang gửi...";
+      submitBtn.innerText = "⏳ Đang quay quà...";
       submitBtn.disabled = true;
 
       const payload = {
         name: document.getElementById("name").value,
         phone: document.getElementById("phone").value,
         className: document.getElementById("className").value,
-        email: document.getElementById("email").value,
-        prize: document.getElementById("prize").value
+        email: document.getElementById("email").value
       };
 
       fetch(SCRIPT_URL, {
@@ -170,8 +133,6 @@
         body: JSON.stringify(payload)
       })
       .then(() => {
-        // Chuyển sang màn hình gửi kết quả thành công
-        document.getElementById("displayPrize").innerText = payload.prize.toUpperCase();
         document.getElementById("formScreen").style.display = "none";
         document.getElementById("successScreen").style.display = "block";
       })
