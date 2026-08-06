@@ -249,25 +249,25 @@
       <form id="ecopForm">
         <div class="form-group">
           <label for="name">Họ và Tên *</label>
-          <input type="text" id="name" required placeholder="Nhập họ và tên...">
+          <input type="text" id="name" required placeholder="VD: Nguyễn Khánh Ngọc">
         </div>
 
         <div class="form-group">
           <label for="phone">Số điện thoại *</label>
-          <input type="tel" id="phone" required placeholder="Nhập số điện thoại...">
+          <input type="tel" id="phone" required placeholder="VD: 0706886070">
         </div>
 
         <div class="form-group">
-          <label for="className">Lớp *</label>
-          <input type="text" id="className" required placeholder="VD: 10A1...">
+          <label for="className">Lớp-Khóa *</label>
+          <input type="text" id="className" required placeholder="VD: 11A2-K29">
         </div>
 
         <div class="form-group">
           <label for="email">Email nhận xác nhận *</label>
-          <input type="email" id="email" required placeholder="Nhập địa chỉ email...">
+          <input type="email" id="email" required placeholder="eventclubofphc@gmail.com">
         </div>
 
-        <button type="submit" class="btn-submit" id="submitBtn">GỬI KẾT QUẢ 🚀</button>
+        <button type="submit" class="btn-submit" id="submitBtn">🎬 GỬI KẾT QUẢ 🐾</button>
       </form>
     </div>
 
@@ -276,7 +276,7 @@
       <div class="success-badge">✓</div>
       <h2 style="color: #166534; font-size: 20px; font-weight: 700; margin-bottom: 8px;">GỬI KẾT QUẢ THÀNH CÔNG!</h2>
       <p style="color: #64748b; font-size: 14px; line-height: 1.6;">
-        Thông tin của bạn đã được hệ thống ghi nhận.
+        Cảm ơn bạn đã tham gia booth của ECOP! 🎉🐾
       </p>
       
       <div class="success-box">
@@ -285,7 +285,7 @@
         </p>
       </div>
 
-      <p style="color: #94a3b8; font-size: 13px; margin-top: 20px;">Cảm ơn bạn đã tham gia booth của ECOP! 🎉🐾</p>
+      <p style="color: #94a3b8; font-size: 13px; margin-top: 20px;">Project by Event Club of PHC Gen 5.0</p>
     </div>
 
   </div>
@@ -332,7 +332,7 @@
       e.preventDefault();
 
       const submitBtn = document.getElementById("submitBtn");
-      submitBtn.innerText = "⏳ Đang quay quà...";
+      submitBtn.innerText = "⏳ Đang bốc thăm";
       submitBtn.disabled = true;
 
       const payload = {
@@ -354,9 +354,13 @@
       })
       .catch((error) => {
         alert("Có lỗi xảy ra khi gửi dữ liệu. Vui lòng thử lại!");
-        submitBtn.innerText = "GỬI KẾT QUẢ 🚀";
+        submitBtn.innerText = "🎬 GỬI KẾT QUẢ 🐾";
         submitBtn.disabled = false;
       });
+    });
+  </script>
+</body>
+</html>
     });
   </script>
 </body>
