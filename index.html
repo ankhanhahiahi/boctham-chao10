@@ -2,122 +2,235 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ECOP - Bốc Thăm May Mắn</title>
   <style>
     :root {
       --ecop-green: #22c55e;
-      --ecop-blue: #1e3a8a;
-      --bg-color: #f8fafc;
+      --ecop-blue: #0e3a6c;
+      --ecop-yellow: #f59e0b;
+      --ecop-pink: #ec4899;
+      --bg-color: #ffffff;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
     body {
-      background-color: var(--bg-color);
+      background-color: #f8fafc;
+      background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+      background-size: 20px 20px;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 20px;
+      padding: 16px;
       position: relative;
       overflow-x: hidden;
     }
 
-    /* BIỂU TƯỢNG TRANG TRÍ NỀN TRANH / PHONG CÁCH ECOP */
-    .bg-icon {
-      position: absolute;
-      font-size: 24px;
-      opacity: 0.25;
-      user-select: none;
+    /* HIỆU ỨNG MÈO VÀ CUỘN PHIM RƠI TỪ TRÊN XUỐNG */
+    .falling-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
     }
 
+    .falling-item {
+      position: absolute;
+      top: -50px;
+      user-select: none;
+      animation: fall linear infinite;
+      opacity: 0.85;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0.2;
+      }
+    }
+
+    /* KHUNG THẺ NỘI DUNG CHÍNH */
     .card {
       background: #ffffff;
       width: 100%;
-      max-width: 420px;
-      padding: 36px 28px;
-      border-radius: 24px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+      max-width: 440px;
+      padding: 32px 24px;
+      border-radius: 28px;
+      box-shadow: 0 20px 40px rgba(14, 58, 108, 0.08), 0 1px 3px rgba(0,0,0,0.05);
       text-align: center;
       position: relative;
       z-index: 10;
-      border: 1px solid #f1f5f9;
+      border: 2px solid #f1f5f9;
     }
 
-    /* LOGO ECOP ĐA MÀU */
-    .logo { font-size: 36px; font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; }
-    .logo span:nth-child(1) { color: #eab308; }
-    .logo span:nth-child(2) { color: #f97316; }
-    .logo span:nth-child(3) { color: #06b6d4; }
-    .logo span:nth-child(4) { color: #ec4899; }
+    /* LOGO ECOP */
+    .logo-wrapper {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-    .title { color: #1e293b; font-size: 22px; font-weight: 800; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .logo-img {
+      max-width: 180px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
+    }
 
-    .form-group { text-align: left; margin-bottom: 16px; }
-    .form-group label { display: block; font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 6px; }
+    /* TIÊU ĐỀ */
+    .main-title {
+      margin-bottom: 24px;
+      line-height: 1.25;
+    }
+
+    .title-line1 {
+      display: block;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--ecop-blue);
+      letter-spacing: 0.5px;
+    }
+
+    .title-line2 {
+      display: block;
+      font-size: 28px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #f59e0b 0%, #ec4899 50%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 4px;
+    }
+
+    /* FORM VÀ INPUT */
+    .form-group {
+      text-align: left;
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 6px;
+      margin-left: 2px;
+    }
+
     .form-group input {
       width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
-      font-size: 14px;
+      padding: 14px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 14px;
+      font-size: 16px; /* Ngăn iOS tự phóng to zoom */
       outline: none;
-      background: #f8fafc;
-      transition: all 0.2s;
+      background: #fafafa;
+      color: #0f172a;
+      transition: all 0.25s ease;
     }
-    .form-group input:focus { border-color: var(--ecop-green); background: #fff; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15); }
 
+    .form-group input:focus {
+      border-color: var(--ecop-green);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+    }
+
+    .form-group input::placeholder {
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    /* NÚT GỬI KẾT QUẢ */
     .btn-submit {
       width: 100%;
-      background: var(--ecop-green);
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
       color: #ffffff;
       border: none;
-      padding: 14px;
-      border-radius: 12px;
-      font-size: 16px;
+      padding: 16px;
+      border-radius: 16px;
+      font-size: 17px;
       font-weight: 800;
       cursor: pointer;
-      margin-top: 10px;
-      box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
-      transition: all 0.2s;
+      margin-top: 12px;
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+      transition: all 0.2s ease;
+      letter-spacing: 0.5px;
     }
-    .btn-submit:hover { background: #16a34a; transform: translateY(-1px); }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+      box-shadow: 0 4px 10px rgba(34, 197, 94, 0.2);
+    }
 
     /* MÀN HÌNH THÀNH CÔNG */
-    #successScreen { display: none; text-align: center; padding: 10px 0; }
-    .success-icon {
-      width: 64px;
-      height: 64px;
+    #successScreen {
+      display: none;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .success-badge {
+      width: 72px;
+      height: 72px;
       background: #dcfce7;
       color: #166534;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
+      font-size: 36px;
       margin: 0 auto 16px auto;
+      box-shadow: 0 10px 20px rgba(34, 197, 94, 0.2);
+    }
+
+    .success-box {
+      background: #f0fdf4;
+      border: 2px dashed #22c55e;
+      padding: 16px;
+      border-radius: 16px;
+      margin-top: 16px;
     }
   </style>
 </head>
 <body>
 
-  <!-- ICONS NỀN TRANG TRÍ -->
-  <div class="bg-icon" style="top: 10%; left: 8%;">🎬</div>
-  <div class="bg-icon" style="top: 15%; right: 12%;">🐾</div>
-  <div class="bg-icon" style="top: 65%; left: 10%;">🎁</div>
-  <div class="bg-icon" style="top: 75%; right: 8%;">🎥</div>
-  <div class="bg-icon" style="top: 40%; left: 5%;">🍿</div>
-  <div class="bg-icon" style="top: 45%; right: 6%;">⭐</div>
+  <!-- KHU VỰC TẠO HIỆU ỨNG MÈO VÀ CÁC ICON PHIM RƠI -->
+  <div class="falling-container" id="fallingContainer"></div>
 
+  <!-- THẺ CHÍNH (CARD) -->
   <div class="card">
-    <div class="logo">
-      <span>E</span><span>C</span><span>O</span><span>P</span>
+    
+    <!-- LOGO ECOP -->
+    <div class="logo-wrapper">
+      <img src="https://i.ibb.co/ymHxvWhF/LOGO-ECOP.png" alt="LOGO ECOP" class="logo-img">
     </div>
-    <h1 class="title">🎬 BỐC THĂM 🐾 MAY MẮN</h1>
 
-    <!-- FORM ĐIỀN THÔNG TIN (KHÔNG CÓ Ô CHỌN QUÀ) -->
+    <!-- TIÊU ĐỀ -->
+    <h1 class="main-title">
+      <span class="title-line1">🎬 BỐC THĂM 🐾</span>
+      <span class="title-line2">MAY MẮN</span>
+    </h1>
+
+    <!-- FORM ĐIỀN THÔNG TIN -->
     <div id="formScreen">
       <form id="ecopForm">
         <div class="form-group">
@@ -140,33 +253,76 @@
           <input type="email" id="email" required placeholder="Nhập địa chỉ email...">
         </div>
 
-        <button type="submit" class="btn-submit" id="submitBtn">GỬI KẾT QUẢ</button>
+        <button type="submit" class="btn-submit" id="submitBtn">GỬI KẾT QUẢ 🚀</button>
       </form>
     </div>
 
     <!-- MÀN HÌNH THÀNH CÔNG -->
     <div id="successScreen">
-      <div class="success-icon">✓</div>
-      <h2 style="color: #166534; font-size: 20px; font-weight: 800; margin-bottom: 8px;">GỬI KẾT QUẢ THÀNH CÔNG!</h2>
-      <p style="color: #64748b; font-size: 14px; line-height: 1.5; margin-bottom: 16px;">
-        Thông tin của bạn đã được lưu vào hệ thống.
+      <div class="success-badge">✓</div>
+      <h2 style="color: #166534; font-size: 22px; font-weight: 800; margin-bottom: 8px;">GỬI KẾT QUẢ THÀNH CÔNG!</h2>
+      <p style="color: #64748b; font-size: 14px; line-height: 1.5;">
+        Thông tin của bạn đã được hệ thống ghi nhận.
       </p>
-      <div style="background: #f0fdf4; border: 1px dashed #22c55e; padding: 14px; border-radius: 12px;">
-        <p style="color: #0e3a6c; font-size: 14px; font-weight: bold; margin: 0;">📩 Hãy kiểm tra Email ngay để xem phần quà may mắn bạn nhận được nhé!</p>
+      
+      <div class="success-box">
+        <p style="color: #0e3a6c; font-size: 15px; font-weight: 800; margin: 0; line-height: 1.4;">
+          📩 Hãy kiểm tra Email ngay để xem phần quà may mắn bạn nhận được nhé!
+        </p>
       </div>
-      <p style="color: #94a3b8; font-size: 13px; margin-top: 16px;">Cảm ơn bạn đã tham gia booth của ECOP! 🎉</p>
+
+      <p style="color: #94a3b8; font-size: 13px; margin-top: 20px;">Cảm ơn bạn đã tham gia booth của ECOP! 🎉🐾</p>
     </div>
+
   </div>
 
   <script>
-    // Link Web App mới nhất của bạn
+    // 1. TẠO HIỆU ỨNG CÁC CON MÈO VÀ CUỘN PHIM RƠI DỰA TRÊN JS
+    const fallingItems = ['🐱', '🐈', '😻', '😸', '🐾', '🐱‍👓', '😽', '🎬', '🎞️', '🎥', '🍿', '🎟️', '⭐'];
+    const container = document.getElementById('fallingContainer');
+
+    function createFallingItem() {
+      const item = document.createElement('div');
+      item.className = 'falling-item';
+      
+      // Chọn ngẫu nhiên icon
+      const randomIcon = fallingItems[Math.floor(Math.random() * fallingItems.length)];
+      item.innerText = randomIcon;
+
+      // Chọn vị trí, kích thước và tốc độ rơi ngẫu nhiên
+      const startLeft = Math.random() * 100; // 0% - 100% màn hình
+      const size = Math.random() * 16 + 20; // Kích thước từ 20px -> 36px
+      const duration = Math.random() * 5 + 5; // Thời gian rơi từ 5s -> 10s
+      const delay = Math.random() * 2;
+
+      item.style.left = startLeft + 'vw';
+      item.style.fontSize = size + 'px';
+      item.style.animationDuration = duration + 's';
+      item.style.animationDelay = delay + 's';
+
+      container.appendChild(item);
+
+      // Tự xóa bớt element sau khi rơi xong để tránh nặng máy
+      setTimeout(() => {
+        item.remove();
+      }, (duration + delay) * 1000);
+    }
+
+    // Tạo các icon ban đầu và lặp lại liên tục
+    for (let i = 0; i < 20; i++) {
+      createFallingItem();
+    }
+    setInterval(createFallingItem, 600);
+
+
+    // 2. XỬ LÝ GỬI FORM VỀ GOOGLE APPS SCRIPT
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZgiy9o0E1RvZm-35B98GfEy1i40cjl2W526cJ8jY5TkL65oF4eOaFdyQs7qyDPa_-UA/exec";
 
     document.getElementById("ecopForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
       const submitBtn = document.getElementById("submitBtn");
-      submitBtn.innerText = "⏳ Đang xử lý...";
+      submitBtn.innerText = "⏳ Đang quay quà...";
       submitBtn.disabled = true;
 
       const payload = {
@@ -188,7 +344,7 @@
       })
       .catch((error) => {
         alert("Có lỗi xảy ra khi gửi dữ liệu. Vui lòng thử lại!");
-        submitBtn.innerText = "GỬI KẾT QUẢ";
+        submitBtn.innerText = "GỬI KẾT QUẢ 🚀";
         submitBtn.disabled = false;
       });
     });
