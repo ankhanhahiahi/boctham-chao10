@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ECOP - Bốc Thăm May Mắn</title>
   <style>
+    /* BẢNG MÀU CHÍNH TỪ LOGO ECOP */
     :root {
+      --ecop-yellow: #E3B652;
+      --ecop-orange: #E08A54;
+      --ecop-blue: #59B5D8;
+      --ecop-red: #D75756;
+      --ecop-dark: #0e3a6c;
       --ecop-green: #22c55e;
-      --ecop-blue: #0e3a6c;
-      --ecop-yellow: #f59e0b;
-      --ecop-pink: #ec4899;
-      --bg-color: #ffffff;
+      --bg-white: #ffffff;
     }
 
     * {
@@ -22,9 +25,12 @@
     }
 
     body {
-      background-color: #f8fafc;
-      background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
-      background-size: 20px 20px;
+      background-color: #ffffff;
+      background-image: 
+        radial-gradient(rgba(89, 181, 216, 0.12) 1.5px, transparent 1.5px),
+        radial-gradient(rgba(224, 138, 84, 0.12) 1.5px, #ffffff 1.5px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -34,13 +40,13 @@
       overflow-x: hidden;
     }
 
-    /* HIỆU ỨNG MÈO VÀ CUỘN PHIM RƠI TỪ TRÊN XUỐNG */
+    /* HIỆU ỨNG CÁC ICON MÈO VÀ PHIM RƠI TỪ TRÊN XUỐNG */
     .falling-container {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       pointer-events: none;
       z-index: 1;
       overflow: hidden;
@@ -48,54 +54,61 @@
 
     .falling-item {
       position: absolute;
-      top: -50px;
+      top: -60px;
       user-select: none;
-      animation: fall linear infinite;
+      animation: fallAndSway linear infinite;
       opacity: 0.85;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
     }
 
-    @keyframes fall {
+    @keyframes fallAndSway {
       0% {
-        transform: translateY(-50px) rotate(0deg);
+        transform: translateY(-60px) rotate(0deg) translateX(0);
         opacity: 0.9;
       }
+      50% {
+        transform: translateY(50vh) rotate(180deg) translateX(25px);
+      }
       100% {
-        transform: translateY(105vh) rotate(360deg);
+        transform: translateY(105vh) rotate(360deg) translateX(-20px);
         opacity: 0.2;
       }
     }
 
-    /* KHUNG THẺ NỘI DUNG CHÍNH */
+    /* THẺ GIAO DIỆN CHÍNH (CARD) */
     .card {
       background: #ffffff;
       width: 100%;
       max-width: 440px;
       padding: 32px 24px;
       border-radius: 28px;
-      box-shadow: 0 20px 40px rgba(14, 58, 108, 0.08), 0 1px 3px rgba(0,0,0,0.05);
+      box-shadow: 
+        0 20px 40px rgba(14, 58, 108, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04);
       text-align: center;
       position: relative;
       z-index: 10;
-      border: 2px solid #f1f5f9;
+      border: 3px solid #f8fafc;
     }
 
-    /* LOGO ECOP */
-    .logo-wrapper {
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    /* KHUNG CHỨA LOGO ECOP */
+    .logo-container {
+      background: #111827;
+      border-radius: 20px;
+      padding: 12px 20px;
+      display: inline-block;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
     }
 
     .logo-img {
-      max-width: 180px;
+      max-width: 160px;
       height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
+      display: block;
+      margin: 0 auto;
     }
 
-    /* TIÊU ĐỀ */
+    /* TIÊU ĐỀ TRÊN CÙNG */
     .main-title {
       margin-bottom: 24px;
       line-height: 1.25;
@@ -105,23 +118,23 @@
       display: block;
       font-size: 22px;
       font-weight: 800;
-      color: var(--ecop-blue);
+      color: var(--ecop-dark);
       letter-spacing: 0.5px;
     }
 
     .title-line2 {
       display: block;
-      font-size: 28px;
+      font-size: 30px;
       font-weight: 900;
-      background: linear-gradient(135deg, #f59e0b 0%, #ec4899 50%, #06b6d4 100%);
+      background: linear-gradient(135deg, var(--ecop-yellow) 0%, var(--ecop-orange) 35%, var(--ecop-blue) 70%, var(--ecop-red) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       margin-top: 4px;
     }
 
-    /* FORM VÀ INPUT */
+    /* FORM NHẬP THÔNG TIN */
     .form-group {
       text-align: left;
       margin-bottom: 16px;
@@ -141,17 +154,17 @@
       padding: 14px 16px;
       border: 2px solid #e2e8f0;
       border-radius: 14px;
-      font-size: 16px; /* Ngăn iOS tự phóng to zoom */
+      font-size: 16px; /* Giữ 16px chuẩn để tránh zoom trên iPhone/iPad */
       outline: none;
-      background: #fafafa;
+      background: #ffffff;
       color: #0f172a;
       transition: all 0.25s ease;
     }
 
     .form-group input:focus {
-      border-color: var(--ecop-green);
+      border-color: var(--ecop-blue);
       background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+      box-shadow: 0 0 0 4px rgba(89, 181, 216, 0.2);
     }
 
     .form-group input::placeholder {
@@ -162,7 +175,7 @@
     /* NÚT GỬI KẾT QUẢ */
     .btn-submit {
       width: 100%;
-      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      background: linear-gradient(135deg, var(--ecop-green) 0%, #16a34a 100%);
       color: #ffffff;
       border: none;
       padding: 16px;
@@ -170,7 +183,7 @@
       font-size: 17px;
       font-weight: 800;
       cursor: pointer;
-      margin-top: 12px;
+      margin-top: 10px;
       box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
       transition: all 0.2s ease;
       letter-spacing: 0.5px;
@@ -204,7 +217,7 @@
 
     .success-box {
       background: #f0fdf4;
-      border: 2px dashed #22c55e;
+      border: 2px dashed var(--ecop-green);
       padding: 16px;
       border-radius: 16px;
       margin-top: 16px;
@@ -213,18 +226,18 @@
 </head>
 <body>
 
-  <!-- KHU VỰC TẠO HIỆU ỨNG MÈO VÀ CÁC ICON PHIM RƠI -->
+  <!-- KHU VỰC TẠO HIỆU ỨNG RƠI -->
   <div class="falling-container" id="fallingContainer"></div>
 
   <!-- THẺ CHÍNH (CARD) -->
   <div class="card">
     
     <!-- LOGO ECOP -->
-    <div class="logo-wrapper">
+    <div class="logo-container">
       <img src="https://i.ibb.co/ymHxvWhF/LOGO-ECOP.png" alt="LOGO ECOP" class="logo-img">
     </div>
 
-    <!-- TIÊU ĐỀ -->
+    <!-- TIÊU ĐỀ CHÍNH -->
     <h1 class="main-title">
       <span class="title-line1">🎬 BỐC THĂM 🐾</span>
       <span class="title-line2">MAY MẮN</span>
@@ -277,22 +290,25 @@
   </div>
 
   <script>
-    // 1. TẠO HIỆU ỨNG CÁC CON MÈO VÀ CUỘN PHIM RƠI DỰA TRÊN JS
-    const fallingItems = ['🐱', '🐈', '😻', '😸', '🐾', '🐱‍👓', '😽', '🎬', '🎞️', '🎥', '🍿', '🎟️', '⭐'];
+    // 1. TẠO CÁC ICON MÈO VÀ PHIM RƠI LIÊN TỤC
+    const fallingItems = [
+      '🐱', '🐈‍⬛', '😻', '😸', '😽', '🙀', '🐱‍👓', '🐾', 
+      '🎬', '🎞️', '🎥', '🍿', '🎟️', '⭐', '🎈'
+    ];
     const container = document.getElementById('fallingContainer');
 
     function createFallingItem() {
       const item = document.createElement('div');
       item.className = 'falling-item';
       
-      // Chọn ngẫu nhiên icon
+      // Lấy ngẫu nhiên icon
       const randomIcon = fallingItems[Math.floor(Math.random() * fallingItems.length)];
       item.innerText = randomIcon;
 
-      // Chọn vị trí, kích thước và tốc độ rơi ngẫu nhiên
-      const startLeft = Math.random() * 100; // 0% - 100% màn hình
-      const size = Math.random() * 16 + 20; // Kích thước từ 20px -> 36px
-      const duration = Math.random() * 5 + 5; // Thời gian rơi từ 5s -> 10s
+      // Thiết lập vị trí, kích thước và tốc độ rơi ngẫu nhiên
+      const startLeft = Math.random() * 100; // Vị trí từ 0% đến 100% chiều rộng
+      const size = Math.random() * 16 + 22;  // Kích thước icon từ 22px đến 38px
+      const duration = Math.random() * 5 + 6; // Thời gian rơi từ 6s đến 11s
       const delay = Math.random() * 2;
 
       item.style.left = startLeft + 'vw';
@@ -302,20 +318,20 @@
 
       container.appendChild(item);
 
-      // Tự xóa bớt element sau khi rơi xong để tránh nặng máy
+      // Tự động giải phóng phần tử sau khi rơi xong
       setTimeout(() => {
         item.remove();
       }, (duration + delay) * 1000);
     }
 
-    // Tạo các icon ban đầu và lặp lại liên tục
-    for (let i = 0; i < 20; i++) {
+    // Khởi tạo các phần tử ban đầu và duy trì rơi liên tục
+    for (let i = 0; i < 22; i++) {
       createFallingItem();
     }
-    setInterval(createFallingItem, 600);
+    setInterval(createFallingItem, 550);
 
 
-    // 2. XỬ LÝ GỬI FORM VỀ GOOGLE APPS SCRIPT
+    // 2. KẾT NỐI VÀ GỬI DỮ LIỆU ĐẾN GOOGLE APPS SCRIPT
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZgiy9o0E1RvZm-35B98GfEy1i40cjl2W526cJ8jY5TkL65oF4eOaFdyQs7qyDPa_-UA/exec";
 
     document.getElementById("ecopForm").addEventListener("submit", function(e) {
