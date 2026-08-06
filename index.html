@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ECOP - Bốc Thăm May Mắn</title>
   <style>
-    /* BẢNG MÀU CHÍNH TỪ LOGO ECOP */
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap');
+
+    /* BẢNG MÀU CHÍNH CỦA ECOP */
     :root {
       --ecop-yellow: #E3B652;
       --ecop-orange: #E08A54;
@@ -24,10 +26,10 @@
     }
 
     body {
-      background-color: #ffffff;
+      background-color: #f1f5f9;
       background-image: 
-        radial-gradient(rgba(89, 181, 216, 0.12) 1.5px, transparent 1.5px),
-        radial-gradient(rgba(224, 138, 84, 0.12) 1.5px, #ffffff 1.5px);
+        radial-gradient(rgba(89, 181, 216, 0.15) 1.5px, transparent 1.5px),
+        radial-gradient(rgba(224, 138, 84, 0.15) 1.5px, #f1f5f9 1.5px);
       background-size: 30px 30px;
       background-position: 0 0, 15px 15px;
       display: flex;
@@ -39,7 +41,7 @@
       overflow-x: hidden;
     }
 
-    /* HIỆU ỨNG CÁC ICON MÈO VÀ PHIM RƠI TỪ TRÊN XUỐNG */
+    /* HIỆU ỨNG CÁC ICON RƠI */
     .falling-container {
       position: fixed;
       top: 0;
@@ -56,14 +58,13 @@
       top: -60px;
       user-select: none;
       animation: fallAndSway linear infinite;
-      opacity: 0.85;
-      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
+      opacity: 0.8;
     }
 
     @keyframes fallAndSway {
       0% {
         transform: translateY(-60px) rotate(0deg) translateX(0);
-        opacity: 0.9;
+        opacity: 0.85;
       }
       50% {
         transform: translateY(50vh) rotate(180deg) translateX(25px);
@@ -79,35 +80,44 @@
       background: #ffffff;
       width: 100%;
       max-width: 440px;
-      padding: 32px 24px;
+      padding: 36px 24px;
       border-radius: 28px;
       box-shadow: 
-        0 20px 40px rgba(14, 58, 108, 0.08),
-        0 2px 8px rgba(0, 0, 0, 0.04);
+        0 20px 40px rgba(14, 58, 108, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.03);
       text-align: center;
       position: relative;
       z-index: 10;
-      border: 3px solid #f8fafc;
+      border: 3px solid #ffffff;
     }
 
-    /* KHUNG LOGO ECOP */
-    .logo-container {
-      background: transparent;
-      display: inline-block;
+    /* LOGO ECOP TRONG SUỐT HOÀN TOÀN (CHUẨN THIẾT KẾ MẪU) */
+    .logo-ecop-container {
       margin-bottom: 12px;
-      min-height: 80px;
+      display: inline-block;
     }
 
-    .logo-img {
-      max-width: 180px;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      opacity: 0;
-      transition: opacity 0.2s ease-in-out;
+    .logo-ecop-text {
+      font-family: 'Fredoka', cursive, sans-serif;
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      display: inline-flex;
+      user-select: none;
+      line-height: 1;
     }
 
-    /* TIÊU ĐỀ TRÊN CÙNG */
+    .logo-ecop-text span {
+      display: inline-block;
+      filter: drop-shadow(0px 3px 0px rgba(0, 0, 0, 0.08));
+    }
+
+    .char-e { color: var(--ecop-yellow); }
+    .char-c { color: var(--ecop-orange); }
+    .char-o { color: var(--ecop-blue); }
+    .char-p { color: var(--ecop-red); }
+
+    /* TIÊU ĐỀ CHÍNH */
     .main-title {
       margin-bottom: 24px;
       line-height: 1.25;
@@ -162,7 +172,6 @@
 
     .form-group input:focus {
       border-color: var(--ecop-blue);
-      background: #ffffff;
       box-shadow: 0 0 0 4px rgba(89, 181, 216, 0.2);
     }
 
@@ -190,7 +199,6 @@
 
     .btn-submit:active {
       transform: scale(0.98);
-      box-shadow: 0 4px 10px rgba(34, 197, 94, 0.2);
     }
 
     /* MÀN HÌNH THÀNH CÔNG */
@@ -211,7 +219,6 @@
       justify-content: center;
       font-size: 36px;
       margin: 0 auto 16px auto;
-      box-shadow: 0 10px 20px rgba(34, 197, 94, 0.2);
     }
 
     .success-box {
@@ -225,24 +232,26 @@
 </head>
 <body>
 
-  <!-- KHU VỰC TẠO HIỆU ỨNG RƠI -->
+  <!-- HIỆU ỨNG ICON RƠI -->
   <div class="falling-container" id="fallingContainer"></div>
 
-  <!-- THẺ CHÍNH (CARD) -->
+  <!-- THẺ THÔNG TIN CHÍNH -->
   <div class="card">
     
-    <!-- LOGO ECOP (ẢNH TỰ ĐỘNG TÁCH NỀN ĐEN BẰNG JS CANVAS) -->
-    <div class="logo-container">
-      <img id="logoImg" src="https://i.ibb.co/7N0RTPsj/LOGO-ECOP.png" alt="LOGO ECOP" class="logo-img">
+    <!-- LOGO ECOP TRONG SUỐT -->
+    <div class="logo-ecop-container">
+      <div class="logo-ecop-text">
+        <span class="char-e">E</span><span class="char-c">C</span><span class="char-o">O</span><span class="char-p">P</span>
+      </div>
     </div>
 
-    <!-- TIÊU ĐỀ CHÍNH -->
+    <!-- TIÊU ĐỀ -->
     <h1 class="main-title">
       <span class="title-line1">🎬 BỐC THĂM 🐾</span>
       <span class="title-line2">MAY MẮN</span>
     </h1>
 
-    <!-- FORM ĐIỀN THÔNG TIN -->
+    <!-- FORM NHẬP -->
     <div id="formScreen">
       <form id="ecopForm">
         <div class="form-group">
@@ -269,7 +278,7 @@
       </form>
     </div>
 
-    <!-- MÀN HÌNH THÀNH CÔNG -->
+    <!-- MÀN HÌNH XÁC NHẬN -->
     <div id="successScreen">
       <div class="success-badge">✓</div>
       <h2 style="color: #166534; font-size: 22px; font-weight: 800; margin-bottom: 8px;">GỬI KẾT QUẢ THÀNH CÔNG!</h2>
@@ -289,49 +298,9 @@
   </div>
 
   <script>
-    // 1. TỰ ĐỘNG BÓC TÁCH NỀN ĐEN TRỰC TIẾP CỦA FILE ẢNH
-    window.addEventListener('DOMContentLoaded', () => {
-      const logoImg = document.getElementById('logoImg');
-      if (!logoImg) return;
-
-      const tempImg = new Image();
-      tempImg.crossOrigin = 'anonymous';
-      tempImg.src = logoImg.src;
-
-      tempImg.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = tempImg.naturalWidth;
-        canvas.height = tempImg.naturalHeight;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(tempImg, 0, 0);
-
-        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imgData.data;
-
-        // Quét từng pixel, nếu là màu đen/tối thì biến thành 100% trong suốt
-        for (let i = 0; i < data.length; i += 4) {
-          const r = data[i];
-          const g = data[i + 1];
-          const b = data[i + 2];
-
-          if (r < 65 && g < 65 && b < 65) {
-            data[i + 3] = 0; // Alpha = 0 (Transparent)
-          }
-        }
-
-        ctx.putImageData(imgData, 0, 0);
-        logoImg.src = canvas.toDataURL();
-        logoImg.style.opacity = '1';
-      };
-
-      tempImg.onerror = () => {
-        logoImg.style.opacity = '1';
-      };
-    });
-
-    // 2. TẠO CÁC ICON MÈO VÀ PHIM RƠI LIÊN TỤC
+    // 1. TẠO CÁC ICON RƠI LIÊN TỤC
     const fallingItems = [
-      '🐱', '🐈‍⬛', '😻', '😸', '😽', '🙀', '🐱‍👓', '🐾', 
+      '🐱', '🐈‍⬛', '😻', '😸', '😽', '🐾', 
       '🎬', '🎞️', '🎥', '🍿', '🎟️', '⭐', '🎈'
     ];
     const container = document.getElementById('fallingContainer');
@@ -339,9 +308,7 @@
     function createFallingItem() {
       const item = document.createElement('div');
       item.className = 'falling-item';
-      
-      const randomIcon = fallingItems[Math.floor(Math.random() * fallingItems.length)];
-      item.innerText = randomIcon;
+      item.innerText = fallingItems[Math.floor(Math.random() * fallingItems.length)];
 
       const startLeft = Math.random() * 100;
       const size = Math.random() * 16 + 22;
@@ -360,12 +327,12 @@
       }, (duration + delay) * 1000);
     }
 
-    for (let i = 0; i < 22; i++) {
+    for (let i = 0; i < 20; i++) {
       createFallingItem();
     }
-    setInterval(createFallingItem, 550);
+    setInterval(createFallingItem, 600);
 
-    // 3. KẾT NỐI VÀ GỬI DỮ LIỆU ĐẾN GOOGLE APPS SCRIPT
+    // 2. GỬI DỮ LIỆU ĐẾN GOOGLE APPS SCRIPT
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZgiy9o0E1RvZm-35B98GfEy1i40cjl2W526cJ8jY5TkL65oF4eOaFdyQs7qyDPa_-UA/exec";
 
     document.getElementById("ecopForm").addEventListener("submit", function(e) {
