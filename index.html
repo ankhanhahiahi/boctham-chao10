@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ECOP - Bốc Thăm May Mắn</title>
+  
+  <!-- FONT CHỮ TRÒN NỔI CHUẨN CỦA ECOP -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap" rel="stylesheet">
+
   <style>
     /* BẢNG MÀU CHÍNH TỪ LOGO ECOP */
     :root {
@@ -79,7 +85,7 @@
       background: #ffffff;
       width: 100%;
       max-width: 440px;
-      padding: 32px 24px;
+      padding: 36px 24px;
       border-radius: 28px;
       box-shadow: 
         0 20px 40px rgba(14, 58, 108, 0.08),
@@ -90,18 +96,20 @@
       border: 3px solid #ffffff;
     }
 
-    /* KHUNG LOGO ECOP */
-    .logo-container {
-      display: inline-block;
+    /* VÙNG CHỨA LOGO ECOP TRONG SUỐT HOÀN TOÀN */
+    .logo-ecop-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin-bottom: 12px;
+      background: transparent;
     }
 
-    .logo-img {
-      max-width: 180px;
-      height: auto;
+    .ecop-logo-svg {
       display: block;
-      margin: 0 auto;
-      background: transparent;
+      max-width: 210px;
+      height: auto;
+      overflow: visible;
     }
 
     /* TIÊU ĐỀ TRÊN CÙNG */
@@ -227,9 +235,21 @@
   <!-- THẺ CHÍNH (CARD) -->
   <div class="card">
     
-    <!-- LOGO ECOP (LINK ẢNH ĐÃ TÁCH NỀN TRONG SUỐT) -->
-    <div class="logo-container">
-      <img src="https://i.ibb.co/ymHxvWhF/LOGO-ECOP.png" alt="LOGO ECOP" class="logo-img">
+    <!-- LOGO ECOP TRONG SUỐT 100% BẰNG SVG VECTOR -->
+    <div class="logo-ecop-wrapper">
+      <svg class="ecop-logo-svg" viewBox="0 0 280 80" width="220" height="65" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="ecop-shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#0e3a6c" flood-opacity="0.12" />
+          </filter>
+        </defs>
+        <g filter="url(#ecop-shadow)" font-family="'Fredoka', 'Arial Rounded MT Bold', sans-serif" font-weight="700" font-size="62" letter-spacing="1">
+          <text x="25" y="60" fill="#E3B652">E</text>
+          <text x="82" y="60" fill="#E08A54">C</text>
+          <text x="140" y="60" fill="#59B5D8">O</text>
+          <text x="200" y="60" fill="#D75756">P</text>
+        </g>
+      </svg>
     </div>
 
     <!-- TIÊU ĐỀ CHÍNH -->
