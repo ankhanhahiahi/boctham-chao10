@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ECOP - Bốc Thăm May Mắn</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap');
-
-    /* BẢNG MÀU CHÍNH CỦA ECOP */
+    /* BẢNG MÀU CHÍNH TỪ LOGO ECOP */
     :root {
       --ecop-yellow: #E3B652;
       --ecop-orange: #E08A54;
@@ -28,8 +26,8 @@
     body {
       background-color: #f1f5f9;
       background-image: 
-        radial-gradient(rgba(89, 181, 216, 0.15) 1.5px, transparent 1.5px),
-        radial-gradient(rgba(224, 138, 84, 0.15) 1.5px, #f1f5f9 1.5px);
+        radial-gradient(rgba(89, 181, 216, 0.12) 1.5px, transparent 1.5px),
+        radial-gradient(rgba(224, 138, 84, 0.12) 1.5px, #f1f5f9 1.5px);
       background-size: 30px 30px;
       background-position: 0 0, 15px 15px;
       display: flex;
@@ -41,7 +39,7 @@
       overflow-x: hidden;
     }
 
-    /* HIỆU ỨNG CÁC ICON RƠI */
+    /* HIỆU ỨNG CÁC ICON MÈO VÀ PHIM RƠI TỪ TRÊN XUỐNG */
     .falling-container {
       position: fixed;
       top: 0;
@@ -58,13 +56,14 @@
       top: -60px;
       user-select: none;
       animation: fallAndSway linear infinite;
-      opacity: 0.8;
+      opacity: 0.85;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.06));
     }
 
     @keyframes fallAndSway {
       0% {
         transform: translateY(-60px) rotate(0deg) translateX(0);
-        opacity: 0.85;
+        opacity: 0.9;
       }
       50% {
         transform: translateY(50vh) rotate(180deg) translateX(25px);
@@ -80,44 +79,32 @@
       background: #ffffff;
       width: 100%;
       max-width: 440px;
-      padding: 36px 24px;
+      padding: 32px 24px;
       border-radius: 28px;
       box-shadow: 
-        0 20px 40px rgba(14, 58, 108, 0.06),
-        0 2px 8px rgba(0, 0, 0, 0.03);
+        0 20px 40px rgba(14, 58, 108, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04);
       text-align: center;
       position: relative;
       z-index: 10;
       border: 3px solid #ffffff;
     }
 
-    /* LOGO ECOP TRONG SUỐT HOÀN TOÀN (CHUẨN THIẾT KẾ MẪU) */
-    .logo-ecop-container {
+    /* KHUNG LOGO ECOP */
+    .logo-container {
+      display: inline-block;
       margin-bottom: 12px;
-      display: inline-block;
     }
 
-    .logo-ecop-text {
-      font-family: 'Fredoka', cursive, sans-serif;
-      font-size: 56px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      display: inline-flex;
-      user-select: none;
-      line-height: 1;
+    .logo-img {
+      max-width: 180px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      background: transparent;
     }
 
-    .logo-ecop-text span {
-      display: inline-block;
-      filter: drop-shadow(0px 3px 0px rgba(0, 0, 0, 0.08));
-    }
-
-    .char-e { color: var(--ecop-yellow); }
-    .char-c { color: var(--ecop-orange); }
-    .char-o { color: var(--ecop-blue); }
-    .char-p { color: var(--ecop-red); }
-
-    /* TIÊU ĐỀ CHÍNH */
+    /* TIÊU ĐỀ TRÊN CÙNG */
     .main-title {
       margin-bottom: 24px;
       line-height: 1.25;
@@ -199,6 +186,7 @@
 
     .btn-submit:active {
       transform: scale(0.98);
+      box-shadow: 0 4px 10px rgba(34, 197, 94, 0.2);
     }
 
     /* MÀN HÌNH THÀNH CÔNG */
@@ -219,6 +207,7 @@
       justify-content: center;
       font-size: 36px;
       margin: 0 auto 16px auto;
+      box-shadow: 0 10px 20px rgba(34, 197, 94, 0.2);
     }
 
     .success-box {
@@ -232,26 +221,24 @@
 </head>
 <body>
 
-  <!-- HIỆU ỨNG ICON RƠI -->
+  <!-- KHU VỰC TẠO HIỆU ỨNG RƠI -->
   <div class="falling-container" id="fallingContainer"></div>
 
-  <!-- THẺ THÔNG TIN CHÍNH -->
+  <!-- THẺ CHÍNH (CARD) -->
   <div class="card">
     
-    <!-- LOGO ECOP TRONG SUỐT -->
-    <div class="logo-ecop-container">
-      <div class="logo-ecop-text">
-        <span class="char-e">E</span><span class="char-c">C</span><span class="char-o">O</span><span class="char-p">P</span>
-      </div>
+    <!-- LOGO ECOP (LINK ẢNH ĐÃ TÁCH NỀN TRONG SUỐT) -->
+    <div class="logo-container">
+      <img src="https://i.ibb.co/ymHxvWhF/LOGO-ECOP.png" alt="LOGO ECOP" class="logo-img">
     </div>
 
-    <!-- TIÊU ĐỀ -->
+    <!-- TIÊU ĐỀ CHÍNH -->
     <h1 class="main-title">
       <span class="title-line1">🎬 BỐC THĂM 🐾</span>
       <span class="title-line2">MAY MẮN</span>
     </h1>
 
-    <!-- FORM NHẬP -->
+    <!-- FORM ĐIỀN THÔNG TIN -->
     <div id="formScreen">
       <form id="ecopForm">
         <div class="form-group">
@@ -278,7 +265,7 @@
       </form>
     </div>
 
-    <!-- MÀN HÌNH XÁC NHẬN -->
+    <!-- MÀN HÌNH THÀNH CÔNG -->
     <div id="successScreen">
       <div class="success-badge">✓</div>
       <h2 style="color: #166534; font-size: 22px; font-weight: 800; margin-bottom: 8px;">GỬI KẾT QUẢ THÀNH CÔNG!</h2>
@@ -298,9 +285,9 @@
   </div>
 
   <script>
-    // 1. TẠO CÁC ICON RƠI LIÊN TỤC
+    // 1. TẠO CÁC ICON MÈO VÀ PHIM RƠI LIÊN TỤC
     const fallingItems = [
-      '🐱', '🐈‍⬛', '😻', '😸', '😽', '🐾', 
+      '🐱', '🐈‍⬛', '😻', '😸', '😽', '🙀', '🐱‍👓', '🐾', 
       '🎬', '🎞️', '🎥', '🍿', '🎟️', '⭐', '🎈'
     ];
     const container = document.getElementById('fallingContainer');
@@ -327,12 +314,12 @@
       }, (duration + delay) * 1000);
     }
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 22; i++) {
       createFallingItem();
     }
-    setInterval(createFallingItem, 600);
+    setInterval(createFallingItem, 550);
 
-    // 2. GỬI DỮ LIỆU ĐẾN GOOGLE APPS SCRIPT
+    // 2. KẾT NỐI VÀ GỬI DỮ LIỆU ĐẾN GOOGLE APPS SCRIPT
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZgiy9o0E1RvZm-35B98GfEy1i40cjl2W526cJ8jY5TkL65oF4eOaFdyQs7qyDPa_-UA/exec";
 
     document.getElementById("ecopForm").addEventListener("submit", function(e) {
