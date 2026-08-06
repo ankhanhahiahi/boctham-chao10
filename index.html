@@ -3,410 +3,184 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bốc Thăm May Mắn - ECOP</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+  <title>Booth Trò Chơi ECOP - Gửi Kết Quả</title>
   <style>
     :root {
-      /* BẢNG MÀU PHỐI THEO LOGO ECOP */
-      --logo-yellow: #E8C56B;  /* Chữ E */
-      --logo-orange: #E59A5F;  /* Chữ C */
-      --logo-blue: #58B4D1;    /* Chữ O */
-      --logo-red: #D5615E;     /* Chữ P */
-      
-      --bg-color: #f4f7f6;     /* Nền sáng tinh tế */
-      --card-bg: rgba(255, 255, 255, 0.95); /* Kính mờ sáng */
-      --text-main: #1e293b;    /* Chữ tối màu */
-      --text-sub: #64748b;
-      --input-bg: #ffffff;
-      --input-border: #cbd5e1;
-    }
-    
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      font-family: 'Roboto', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 10px;
-      box-sizing: border-box;
-      overflow-x: hidden; 
+      --ecop-blue: #1e3a8a;
+      --ecop-green: #166534;
+      --ecop-red: #dc2626;
+      --bg-color: #f8fafc;
     }
 
-    /* KHUNG CHỨA CƠN MƯA ICON */
-    #falling-elements {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none; 
-      z-index: 0;
-      overflow: hidden;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: var(--bg-color); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
 
-    .falling-icon {
-      position: absolute;
-      top: -10vh;
-      animation: fall linear infinite;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(-10vh) rotate(0deg);
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-    
-    /* THIẾT KẾ CARD SÁNG MÀU */
     .container {
-      background: var(--card-bg); 
-      padding: 30px 20px;
-      border-radius: 24px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 
-                  0 0 25px rgba(88, 180, 209, 0.15); /* Quầng sáng nhẹ quanh hộp */
+      background: #ffffff;
       width: 100%;
-      max-width: 420px;
-      text-align: center;
-      position: relative; 
-      z-index: 1;
-      backdrop-filter: blur(10px);
-      box-sizing: border-box;
+      max-width: 480px;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      border: 1px solid #e2e8f0;
     }
 
-    /* ĐỂ NỀN TRONG SUỐT CHO LOGO */
-    img.logo {
-      max-width: 150px;
-      height: auto;
-      margin-bottom: 15px;
-    }
-    
-    h1 {
-      font-size: 1.9em;
-      font-weight: 900;
-      margin: 10px 0 20px 0;
-      color: var(--text-main);
-      letter-spacing: 1px;
-    }
+    .header { text-align: center; margin-bottom: 24px; }
+    .header h1 { color: var(--ecop-blue); font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .header p { color: #64748b; font-size: 14px; }
 
-    .theme-deco {
-      font-size: 1.1em;
-      margin: 0 4px;
-      display: inline-block;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-      text-align: left;
-    }
-    
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 800;
-      color: var(--logo-blue); 
-      font-size: 0.85em;
-      letter-spacing: 0.5px;
-    }
-    
-    input {
+    .form-group { margin-bottom: 16px; text-align: left; }
+    .form-group label { display: block; font-size: 13px; font-weight: 700; color: #334155; margin-bottom: 6px; }
+    .form-group input, .form-group select {
       width: 100%;
       padding: 12px;
-      border: 2px solid var(--input-border);
-      border-radius: 12px;
-      background: var(--input-bg);
-      color: var(--text-main);
-      font-size: 1em;
-      font-family: 'Roboto', sans-serif;
-      box-sizing: border-box;
-      transition: 0.3s;
-    }
-    
-    input::placeholder {
-      color: #94a3b8;
-    }
-    
-    input:focus {
-      border-color: var(--logo-blue);
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
       outline: none;
-      box-shadow: 0 0 0 3px rgba(88, 180, 209, 0.25);
-      background: #ffffff;
+      transition: all 0.2s;
     }
+    .form-group input:focus, .form-group select:focus { border-color: var(--ecop-blue); box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.15); }
 
-    /* NÚT TIẾP TỤC & GỬI KẾT QUẢ */
-    .btn {
+    .btn-submit {
       width: 100%;
-      padding: 14px;
-      font-size: 1.1em;
-      font-weight: 900;
-      font-family: 'Roboto', sans-serif;
-      background-color: var(--logo-red);
+      background: var(--ecop-blue);
       color: #ffffff;
       border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: 10px;
-      box-shadow: 0 4px 15px rgba(213, 97, 94, 0.3);
-      letter-spacing: 0.5px;
-    }
-    
-    .btn:hover {
-      transform: translateY(-2px);
-      background-color: #e2726f;
-      box-shadow: 0 6px 20px rgba(213, 97, 94, 0.5);
-    }
-
-    #task-screen {
-      display: none;
-    }
-
-    .task-title {
-      font-size: 1.1em;
-      font-weight: 700;
-      color: var(--text-main);
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    /* CÁC NÚT MẠNG XÃ HỘI */
-    .social-link {
-      display: block;
-      width: 100%;
       padding: 14px;
-      margin-bottom: 14px;
-      text-decoration: none;
-      font-weight: 800;
       border-radius: 10px;
-      box-sizing: border-box;
-      transition: 0.3s;
-      position: relative;
-      letter-spacing: 0.5px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.2s;
     }
+    .btn-submit:hover { background: #1e1b4b; }
 
-    .social-link:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.05);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    }
-
-    .social-link.clicked {
-      background-color: #2eb85c !important; 
-      color: #ffffff !important;
-      box-shadow: 0 4px 15px rgba(46, 184, 92, 0.3);
-    }
-
-    .social-link.clicked::after {
-      content: " ✓";
-    }
-
-    #finalSubmitBtn {
-      display: none; 
-      background-color: var(--logo-blue);
-      box-shadow: 0 4px 15px rgba(88, 180, 209, 0.3);
-    }
-
-    #finalSubmitBtn:hover {
-      background-color: #6ec4dd;
-      box-shadow: 0 6px 20px rgba(88, 180, 209, 0.5);
-    }
-
-    #success-screen {
+    /* MÀN HÌNH THÀNH CÔNG */
+    #successScreen {
       display: none;
-      padding: 15px 0;
+      text-align: center;
+      padding: 20px 10px;
     }
-    
     .success-icon {
-      font-size: 3.5em;
-      margin-bottom: 10px;
-    }
-    
-    .success-text {
-      font-size: 1.25em;
-      font-weight: 900;
-      color: var(--logo-red); 
-      line-height: 1.4;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .loader {
-      display: none;
-      width: 40px;
-      height: 40px;
-      border: 4px solid #e2e8f0;
-      border-top: 4px solid var(--logo-blue);
+      width: 64px;
+      height: 64px;
+      background: #dcfce7;
+      color: #166534;
       border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 16px auto;
     }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .success-title { color: var(--ecop-blue); font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+    .success-desc { color: #475569; font-size: 14px; line-height: 1.5; margin-bottom: 20px; }
+    .prize-badge {
+      display: inline-block;
+      background: #fef2f2;
+      color: var(--ecop-red);
+      border: 1px dashed var(--ecop-red);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 800;
+      margin-top: 8px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Khung chứa các icon rơi -->
-  <div id="falling-elements"></div>
-
   <div class="container">
-    <img src="https://i.ibb.co/ymHxvWhF/LOGO-ECOP.png" alt="ECOP Logo" class="logo">
-    
-    <h1><span class="theme-deco">🎬</span> BỐC THĂM <span class="theme-deco">🐾</span><br>MAY MẮN</h1>
-    
-    <form id="drawForm">
-      <div class="form-group">
-        <label>HỌ VÀ TÊN</label>
-        <input type="text" id="name" required placeholder="Nhập họ tên của bạn">
+    <!-- Form điền thông tin -->
+    <div id="formScreen">
+      <div class="header">
+        <h1>EVENT CLUB OF PHC</h1>
+        <p>GỬI KẾT QUẢ BỐC THĂM NHẬN QUÀ</p>
       </div>
-      <div class="form-group">
-        <label>SỐ ĐIỆN THOẠI</label>
-        <input type="tel" id="phone" required placeholder="Nhập số điện thoại">
-      </div>
-      <div class="form-group">
-        <label>LỚP</label>
-        <input type="text" id="class" required placeholder="Ví dụ: 10A1">
-      </div>
-      <div class="form-group">
-        <label>EMAIL</label>
-        <input type="email" id="email" required placeholder="Để nhận thông báo trúng thưởng">
-      </div>
-      <button type="submit" class="btn">TIẾP TỤC 😽</button>
-    </form>
 
-    <div id="task-screen">
-      <div class="task-title">Để nhận được phần quà, bạn cần làm thêm 1 bước nữa thôi!!!!<br><span style="color: var(--logo-red);">Đó là follow tất cả các nền tảng của ECOP:</span></div>
-      
-      <a href="https://www.facebook.com/eventclubofphc" target="_blank" class="social-link" style="background-color: var(--logo-blue); color: #ffffff;" onclick="markClicked('fanpage', this)">Fanpage ECOP</a>
-      <a href="https://www.tiktok.com/@ecopark.49htk?is_from_webapp=1&sender_device=pc" target="_blank" class="social-link" style="background-color: var(--logo-orange); color: #ffffff;" onclick="markClicked('tiktok', this)">Tiktok ECOP</a>
-      <a href="https://www.instagram.com/eventclubofphc/" target="_blank" class="social-link" style="background-color: var(--logo-yellow); color: #07070a;" onclick="markClicked('ig', this)">Instagram ECOP</a>
+      <form id="ecopForm">
+        <div class="form-group">
+          <label for="name">Họ và Tên *</label>
+          <input type="text" id="name" required placeholder="Nhập họ và tên...">
+        </div>
 
-      <button id="finalSubmitBtn" class="btn" onclick="sendDataToGoogle()">GỬI KẾT QUẢ 🎥</button>
+        <div class="form-group">
+          <label for="phone">Số điện thoại *</label>
+          <input type="tel" id="phone" required placeholder="Nhập số điện thoại...">
+        </div>
+
+        <div class="form-group">
+          <label for="className">Lớp *</label>
+          <input type="text" id="className" required placeholder="Nhập lớp (VD: 10A1)...">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email nhận xác nhận *</label>
+          <input type="email" id="email" required placeholder="Nhập địa chỉ email...">
+        </div>
+
+        <div class="form-group">
+          <label for="prize">Phần quà trúng thưởng *</label>
+          <select id="prize" required>
+            <option value="MÓC KHÓA">MÓC KHÓA</option>
+            <option value="TRANH VẼ ẢNH">TRANH VẼ ẢNH</option>
+            <option value="BLIND BOX">BLIND BOX</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">GỬI KẾT QUẢ</button>
+      </form>
     </div>
 
-    <div class="loader" id="loading"></div>
-
-    <div id="success-screen">
-      <div class="success-icon">💌</div>
-      <div class="success-text" id="main-msg">CẢM ƠN BẠN ĐÃ THAM GIA TRÒ CHƠI TẠI BOOTH CỦA ECOP.</div>
-      <div style="color: var(--logo-blue); font-size: 1.2em; font-weight: bold; margin-top: 15px;" id="sub-msg">CHÚC BẠN MỘT NGÀY THẬT VUI!!!!</div>
-      <div style="color: var(--text-sub); font-size: 0.95em; line-height: 1.5; margin-top: 25px;" id="email-note">
-        Hệ thống đã gửi thông báo phần quà vào <b>Email</b> của bạn.<br>Hãy kiểm tra hộp thư nhé!
-      </div>
+    <!-- Màn hình gửi kết quả thành công -->
+    <div id="successScreen">
+      <div class="success-icon">✓</div>
+      <h2 class="success-title">GỬI KẾT QUẢ THÀNH CÔNG!</h2>
+      <p class="success-desc">Thông tin của bạn đã được lưu vào hệ thống. Email thông báo phần quà cũng đã được gửi đến hộp thư của bạn.</p>
+      <p style="font-size: 13px; color: #64748b;">Phần quà bạn đã nhận:</p>
+      <div class="prize-badge" id="displayPrize">MÓC KHÓA</div>
     </div>
   </div>
 
   <script>
-    // Link Web App của bạn đã được tích hợp chuẩn xác
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzXfv-DWdjr_erjoHpT3-Q5l2BTlBJGP1jTzSw9DvA0tyinGFxTIywVViAr3PsB-bBJxg/exec"; 
-    let userData = {};
-    let statusLinks = { fanpage: false, tiktok: false, ig: false };
+    // Link Web App chính thức của bạn
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXfv-DWdjr_erjoHpT3-Q5l2BTlBJGP1jTzSw9DvA0tyinGFxTIywVViAr3PsB-bBJxg/exec";
 
-    // Bọc toàn bộ xử lý trong DOMContentLoaded để chống lỗi load sớm trên di động
-    document.addEventListener("DOMContentLoaded", function() {
-      // Khởi tạo mưa icon (bản siêu nhẹ, loại bỏ filter nặng gây đơ GPU)
-      createFallingIcons();
+    document.getElementById("ecopForm").addEventListener("submit", function(e) {
+      e.preventDefault();
 
-      const drawForm = document.getElementById('drawForm');
-      if (drawForm) {
-        drawForm.addEventListener('submit', function(event) {
-          // Ngăn chặn tuyệt đối hành vi reload trang web mặc định của form
-          event.preventDefault();
-          
-          userData = {
-            name: document.getElementById('name').value,
-            phone: document.getElementById('phone').value,
-            className: document.getElementById('class').value,
-            email: document.getElementById('email').value
-          };
+      const submitBtn = document.getElementById("submitBtn");
+      submitBtn.innerText = "Đang gửi...";
+      submitBtn.disabled = true;
 
-          drawForm.style.display = 'none';
-          const taskScreen = document.getElementById('task-screen');
-          if (taskScreen) {
-            taskScreen.style.display = 'block';
-          }
-        });
-      }
+      const payload = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        className: document.getElementById("className").value,
+        email: document.getElementById("email").value,
+        prize: document.getElementById("prize").value
+      };
+
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        // Chuyển sang màn hình gửi kết quả thành công
+        document.getElementById("displayPrize").innerText = payload.prize.toUpperCase();
+        document.getElementById("formScreen").style.display = "none";
+        document.getElementById("successScreen").style.display = "block";
+      })
+      .catch((error) => {
+        alert("Có lỗi xảy ra khi gửi dữ liệu. Vui lòng thử lại!");
+        submitBtn.innerText = "GỬI KẾT QUẢ";
+        submitBtn.disabled = false;
+      });
     });
-
-    // Hàm tạo mưa icon siêu mượt
-    function createFallingIcons() {
-      const icons = ['🎞️', '🐱', '🎬', '😸', '📽️', '🐾', '🎥', '😻', '🍿', '🐈'];
-      const container = document.getElementById('falling-elements');
-      if (!container) return;
-      
-      const numberOfIcons = 12; // Giảm xuống 12 để tối ưu hóa hiệu năng RAM di động
-
-      for (let i = 0; i < numberOfIcons; i++) {
-        let el = document.createElement('div');
-        el.className = 'falling-icon';
-        el.innerText = icons[Math.floor(Math.random() * icons.length)];
-        el.style.left = Math.random() * 100 + 'vw';
-        el.style.animationDuration = (Math.random() * 6 + 6) + 's'; 
-        el.style.animationDelay = (Math.random() * 4) + 's';
-        el.style.fontSize = (Math.random() * 10 + 16) + 'px'; 
-        container.appendChild(el);
-      }
-    }
-
-    // Đánh dấu người chơi đã hoàn thành nhiệm vụ MXH
-    function markClicked(platform, element) {
-      statusLinks[platform] = true;
-      element.classList.add('clicked'); 
-
-      if (statusLinks.fanpage && statusLinks.tiktok && statusLinks.ig) {
-        const submitBtn = document.getElementById('finalSubmitBtn');
-        if (submitBtn) submitBtn.style.display = 'block';
-      }
-    }
-
-    // Gửi dữ liệu ngầm bảo mật, chống xoay vòng vô tận
-    function sendDataToGoogle() {
-      const taskScreen = document.getElementById('task-screen');
-      const loader = document.getElementById('loading');
-      const successScreen = document.getElementById('success-screen');
-
-      if (taskScreen) taskScreen.style.display = 'none';
-      if (loader) loader.style.display = 'block';
-
-      try {
-        fetch(WEB_APP_URL, {
-          method: "POST",
-          mode: "cors",
-          redirect: "follow",
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-          },
-          body: JSON.stringify(userData)
-        })
-        .then(response => {
-          if (loader) loader.style.display = 'none';
-          if (successScreen) successScreen.style.display = 'block';
-        })
-        .catch(error => {
-          console.warn("Đã gửi dữ liệu.");
-          if (loader) loader.style.display = 'none';
-          if (successScreen) successScreen.style.display = 'block';
-        });
-      } catch (err) {
-        if (loader) loader.style.display = 'none';
-        if (successScreen) successScreen.style.display = 'block';
-      }
-    }
   </script>
 </body>
 </html>
