@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ECOP - Bốc Thăm May Mắn</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap');
-
     /* BẢNG MÀU CHÍNH TỪ LOGO ECOP */
     :root {
       --ecop-yellow: #E3B652;
@@ -92,22 +90,20 @@
       border: 3px solid #f8fafc;
     }
 
-    /* LOGO ECOP CHUẨN HTML/CSS (TRONG SUỐT 100%, KHÔNG KHUNG ĐEN) */
-    .logo-ecop-text {
-      font-family: 'Fredoka', cursive, sans-serif;
-      font-size: 52px;
-      font-weight: 700;
-      letter-spacing: 2px;
+    /* KHUNG LOGO ECOP (NỀN TRONG SUỐT HOÀN TOÀN) */
+    .logo-container {
+      background: transparent;
       display: inline-block;
-      margin-bottom: 8px;
-      user-select: none;
-      line-height: 1;
+      margin-bottom: 12px;
     }
 
-    .logo-ecop-text .char-e { color: var(--ecop-yellow); text-shadow: 0 4px 12px rgba(227, 182, 82, 0.25); }
-    .logo-ecop-text .char-c { color: var(--ecop-orange); text-shadow: 0 4px 12px rgba(224, 138, 84, 0.25); }
-    .logo-ecop-text .char-o { color: var(--ecop-blue); text-shadow: 0 4px 12px rgba(89, 181, 216, 0.25); }
-    .logo-ecop-text .char-p { color: var(--ecop-red); text-shadow: 0 4px 12px rgba(215, 87, 86, 0.25); }
+    .logo-img {
+      max-width: 180px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.06));
+    }
 
     /* TIÊU ĐỀ TRÊN CÙNG */
     .main-title {
@@ -233,9 +229,9 @@
   <!-- THẺ CHÍNH (CARD) -->
   <div class="card">
     
-    <!-- LOGO ECOP CHUẨN HOÀN TOÀN TRONG SUỐT -->
-    <div class="logo-ecop-text">
-      <span class="char-e">E</span><span class="char-c">C</span><span class="char-o">O</span><span class="char-p">P</span>
+    <!-- LOGO ECOP (LINK ẢNH MỚI) -->
+    <div class="logo-container">
+      <img src="https://i.ibb.co/7N0RTPsj/LOGO-ECOP.png" alt="LOGO ECOP" class="logo-img">
     </div>
 
     <!-- TIÊU ĐỀ CHÍNH -->
