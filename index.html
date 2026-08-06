@@ -90,19 +90,20 @@
       border: 3px solid #f8fafc;
     }
 
-    /* KHUNG LOGO ECOP (NỀN TRONG SUỐT HOÀN TOÀN) */
+    /* KHUNG LOGO ECOP */
     .logo-container {
       background: transparent;
       display: inline-block;
       margin-bottom: 12px;
     }
 
+    /* BỘ LỌC KHỬ MÀU NỀN ĐEN TRỰC TIẾP TRÊN ẢNH */
     .logo-img {
       max-width: 180px;
       height: auto;
       display: block;
       margin: 0 auto;
-      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.06));
+      filter: url(#remove-black);
     }
 
     /* TIÊU ĐỀ TRÊN CÙNG */
@@ -151,7 +152,7 @@
       padding: 14px 16px;
       border: 2px solid #e2e8f0;
       border-radius: 14px;
-      font-size: 16px; /* Cỡ 16px ngăn tự động phóng to trên iOS/iPadOS */
+      font-size: 16px;
       outline: none;
       background: #ffffff;
       color: #0f172a;
@@ -223,13 +224,24 @@
 </head>
 <body>
 
+  <!-- BỘ LỌC TỰ ĐỘNG TÁCH NỀN ĐEN TỪ FILE ẢNH GỐC -->
+  <svg width="0" height="0" style="position: absolute; pointer-events: none;">
+    <filter id="remove-black" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0.33 0.33 0.33 0 -0.05" />
+    </filter>
+  </svg>
+
   <!-- KHU VỰC TẠO HIỆU ỨNG RƠI -->
   <div class="falling-container" id="fallingContainer"></div>
 
   <!-- THẺ CHÍNH (CARD) -->
   <div class="card">
     
-    <!-- LOGO ECOP (LINK ẢNH MỚI) -->
+    <!-- LOGO ECOP (LINK ẢNH MỚI CỦA BẠN) -->
     <div class="logo-container">
       <img src="https://i.ibb.co/7N0RTPsj/LOGO-ECOP.png" alt="LOGO ECOP" class="logo-img">
     </div>
